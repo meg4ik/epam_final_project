@@ -4,9 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from simple_settings import settings
 
+from os import path
+
 __author__ = 'Pavlo Ryndin'
 
-app = Flask(__name__, static_url_path='', static_folder='src/static', template_folder='src/templates')
+temp_dir = path.abspath(path.dirname(__file__))
+app = Flask(__name__, static_folder=path.join(temp_dir, 'static'), template_folder=path.join(temp_dir, 'templates'))
 
 try:
     app.config.update(**settings.as_dict())
