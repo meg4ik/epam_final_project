@@ -7,7 +7,7 @@ SECRET_KEY=secret_key
 
 WTF_CSRF_ENABLED=False
 
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:totalmag@localhost/guest_book'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:totalmag@localhost/department_project'
 #TODO
 #логин пароль на базу данных переделать на скрытый тип
 SQLALCHEMY_TRACK_MODIFICATIONS = False
