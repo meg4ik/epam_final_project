@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 from simple_settings import settings
 
 from os import path
@@ -20,6 +21,7 @@ app.config.from_pyfile(path.join(path.dirname(temp_dir),'configs','common_debug.
 api = Api(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+bcrypt = Bcrypt(app)
 
 from src import routes
 from src.database import models
