@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from flask import render_template, make_response, request, flash
+from flask import render_template, make_response, request, flash, redirect, url_for
 from src.database.models import User
 from src.schemas.user import UserSchema
 from marshmallow import ValidationError
@@ -12,14 +12,16 @@ class Signup(Resource):
         return make_response(render_template("signup.html"), 200)
     def post(self):
         try:
-            user = self.user_schema.load(request.json, session=db.session)
+            user = self.user_schema.load(request.form.to_dict(), session=db.session)
         except ValidationError as e:
-            flash(e)
+            flash(e.normalized_messages()['_schema'][0],category='danger')
+            return redirect(url_for('signup'))
         else:
             try:
-                db.session.add(user)
-                db.session.commit()
+                user.save_to_db()
             except IntegrityError:
-                flash("Such user exists")
+                flash("Such user exists",category='warning')
+                return redirect(url_for('signup'))
             else:
-                return self.user_schema.dump(user), 201
+                flash('Account created successfully!',category='success')
+                return redirect(url_for('signup'))

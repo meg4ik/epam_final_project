@@ -10,11 +10,11 @@ class User(db.Model):
     name = db.Column(db.String(30),nullable=False)
     surname = db.Column(db.String(30),nullable=False)
     email_address = db.Column(db.String(50), nullable=False, unique=True)
-    password = db.Column(db.String(50), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)
+    password = db.Column(db.String(100), nullable=False)
+    is_admin = db.Column(db.Boolean)
     uuid = db.Column(db.String(36), unique=True)
 
-    def __init__(self, username, name, surname, email_address, password, is_admin):
+    def __init__(self, username, name, surname, email_address, password, is_admin=False):
         self.username = username
         self.name = name
         self.surname = surname
@@ -28,6 +28,16 @@ class User(db.Model):
 
     def check_password(self, attempted_password):
         return check_password_hash(self.password, attempted_password)
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+class Role(db.Model):
+    __tablename__ = 'role'
+
+    id = db.Column(db.Integer, primary_key=True)
 
 class Department(db.Model):
     __tablename__ = 'department'

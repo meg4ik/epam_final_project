@@ -9,13 +9,24 @@
     <title>Sign up</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+           {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show">
+                {{ message }}
+              </div>
+           {% endfor %}
+        {% endif %}
+    {% endwith %}
     <h1>Register a new user</h1>
     <form action="{{ url_for('signup') }}" method="POST">
             <input type="text" name="username" placeholder="Enter username" required>
-            <input type="password" name="password" placeholder="Enter password">
-            <input type="text" name="name" placeholder="Enter name">
-            <input type="text" name="surname" placeholder="Enter surname">
-            <input type="email" name="email_address" placeholder="Enter email">
+            <input type="password" name="password" placeholder="Enter password" required>
+            <input type="text" name="name" placeholder="Enter name" required>
+            <input type="text" name="surname" placeholder="Enter surname" required>
+            <input type="email" name="email_address" placeholder="Enter email" required>
+            <input type="checkbox" name="is_admin" value="True">
+            <label for="vehicle3">Admin</label><br><br>
             <input type="submit" value="Submit">
     </form>
 </body>

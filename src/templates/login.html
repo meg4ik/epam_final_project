@@ -9,10 +9,19 @@
     <title>Log in</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+           {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show">
+                {{ message }}
+              </div>
+           {% endfor %}
+        {% endif %}
+    {% endwith %}
     <form action="{{ url_for('login') }}" method="POST">
         <label>
             <input type="text" name="username" placeholder="Enter your username" required>
-            <input type="password" name="password" placeholder="Enter your password">
+            <input type="password" name="password" placeholder="Enter your password" required>
         </label>
         <button>Submit</button>
     </form>
