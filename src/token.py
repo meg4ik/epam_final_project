@@ -7,12 +7,13 @@ from src import app
 def token_required(func):
     @wraps(func)
     def wrapper(self, *args, **kwargs):
-        token = request.headers.get('X-API-KEY')
+        token = request.cookies.get('token')
         if not token:
             flash("Authentication required", category='danger')
             return redirect(url_for('login'))
         try:
-            uuid = jwt.decode(token, app.config['SECRET_KEY'])['user_id']
+            uuid = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])['user_id']
+            print(uuid)
         except (KeyError, jwt.ExpiredSignatureError):
             flash("Token timeout", category='danger')
             return redirect(url_for('login'))

@@ -1,13 +1,10 @@
 import secrets
-#python wsgi.py --settings=configs.common_deploy
+#python wsgi.py --settings=configs.common_debug
 DEBUG=False
 
-secret_key = secrets.token_hex(16)
-SECRET_KEY=secret_key
+SECRET_KEY = secrets.token_hex(16)
 
-WTF_CSRF_ENABLED=False
-
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:totalmag@localhost/guest_book'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:totalmag@localhost/department_project'
 #TODO
 #логин пароль на базу данных переделать на скрытый тип
 SQLALCHEMY_TRACK_MODIFICATIONS = False
