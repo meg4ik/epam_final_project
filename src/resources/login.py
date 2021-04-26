@@ -11,15 +11,18 @@ from src.database.models import User
 
 class Login(Resource):
     def get(self):
-        if not auth:
-            return make_response(render_template("login.html"), 200)
-        flash('You already authorized', category='warning')
-        return redirect(url_for('main'))
-       
-    def post(self):
-        if request.authorization:
-            flash('You allready authorizated', category='danger')
+        token = request.cookies.get('token')
+        if token:
+            try:
+                uuid = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])['user_id']
+                user = User.query.filter_by(uuid = uuid).first()
+            except:
+                return make_response(render_template("login.html"), 200)
+            flash('You already authorized', category='warning')
             return redirect(url_for('main'))
+        return make_response(render_template("login.html"), 200)
+            
+    def post(self):
         auth = request.form.to_dict()
         user = User.query.filter_by(username=auth.get('username')).first()
         if not user or not user.check_password(auth.get('password')):
@@ -35,11 +38,13 @@ class Login(Resource):
 
         flash('You have been authorized', category='success')
 
-        response = make_response(render_template("main.html"))
+        response = make_response(redirect(url_for('main')))
         response.set_cookie('token', token)
         return response
 
 class Logout(Resource):
-    def post():
-        return redirect(url_for('main'))
+    def post(self):
+        response = make_response(redirect(url_for('main')))
+        response.set_cookie('token', expires=0)
+        return response
 
