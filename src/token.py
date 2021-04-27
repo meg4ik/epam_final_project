@@ -13,7 +13,7 @@ def token_required(func):
             return redirect(url_for('login'))
         try:
             uuid = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])['user_id']
-        except (KeyError, jwt.ExpiredSignatureError):
+        except:
             flash("Token timeout", category='danger')
             return redirect(url_for('login'))
         user = User.query.filter_by(uuid=uuid).first()

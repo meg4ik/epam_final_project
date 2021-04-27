@@ -4,14 +4,14 @@ from src.database.models import User
 import jwt
 from src import app
 
+
 class About(Resource):
     def get(self):
         token = request.cookies.get('token')
-        if token:
-            try:
-                uuid = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])['user_id']
-                user = User.query.filter_by(uuid = uuid).first()
-            except:
-                return make_response(redirect(url_for('login')))
-            return make_response(render_template("about.html", auth = True, uuid = uuid, user = user), 201)
-        return make_response(render_template("about.html", auth = None, uuid = None, user = None), 200)
+        try:
+            uuid = jwt.decode(token, app.config['SECRET_KEY'], algorithms=[
+                              "HS256"])['user_id']
+            user = User.query.filter_by(uuid=uuid).first()
+        except:
+            return make_response(render_template("about.html", auth=None, uuid=None, user=None), 200)
+        return make_response(render_template("about.html", auth=True, uuid=uuid, user=user), 202)
