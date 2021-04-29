@@ -23,3 +23,9 @@ def token_required(func):
         return func(self, *args, **kwargs)
 
     return wrapper
+
+def user_return():
+    token = request.cookies.get('token')
+    uuid = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])['user_id']
+    user = User.query.filter_by(uuid=uuid).first()
+    return user
