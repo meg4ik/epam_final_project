@@ -1,19 +1,19 @@
 from flask_restful import Resource
 from src.token import token_required, user_return
 from flask import make_response, render_template, request, flash, redirect, url_for
-from src.database.models import User
+from src.database.models import Department
 from src import db
 from marshmallow import ValidationError
 from sqlalchemy.exc import IntegrityError
-from src.schemas.user import UserSchema
+from src.schemas.department import DepartmentSchema
 
-class Ausers(Resource):
+class Adepartments(Resource):
     @token_required
     def get(self):
         current_user = user_return()
         if current_user.is_admin:
-            users = db.session.query(User).all()
-            return make_response(render_template("ausers.html",auth=True, user=current_user, users=users), 200)
+            departments = db.session.query(Department).all()
+            return make_response(render_template("adepartments.html",auth=True, user=current_user, departments=departments), 200)
         else:
             flash("No permission for this page",category='danger')
             return redirect(url_for('main'))
@@ -21,21 +21,22 @@ class Ausers(Resource):
     def post(self):
         current_user = user_return()
         if current_user.is_admin:
-            user_schema = UserSchema()
+            department_schema = DepartmentSchema()
+            print(request.form.to_dict())
             try:
-                user = user_schema.load(request.form.to_dict(), session=db.session)
+                department = department_schema.load(request.form.to_dict(), session=db.session)
             except ValidationError as e:
                 flash(e.normalized_messages()[[*e.normalized_messages()][0]][0],category='danger')
-                return redirect(url_for('ausers'))
+                return redirect(url_for('adepartments'))
             else:
                 try:
-                    user.save_to_db()
+                    department.save_to_db()
                 except IntegrityError:
-                    flash("Such user exists",category='warning')
-                    return redirect(url_for('ausers'))
+                    flash("Such department exists",category='warning')
+                    return redirect(url_for('adepartment'))
                 else:
-                    flash('Account created successfully!',category='success')
-                    return redirect(url_for('ausers'))
+                    flash('Department created successfully!',category='success')
+                    return redirect(url_for('adepartments'))
         else:
             flash("No permission for this method",category='danger')
             return redirect(url_for('main'))

@@ -25,7 +25,7 @@ class User(db.Model):
     uuid = db.Column(db.String(36), unique=True)
     user_department_role_to = db.relationship("UserDepartmentRole",backref='user',lazy=True)
 
-    def __init__(self, username, name, surname, email_address, password, is_admin=False, user_department_role_to=None):
+    def __init__(self, username, name, surname, email_address, password, is_admin=False):
         self.username = username
         self.name = name
         self.surname = surname
@@ -33,10 +33,6 @@ class User(db.Model):
         self.password = generate_password_hash(password).decode('utf8')
         self.is_admin = is_admin
         self.uuid = str(uuid.uuid4())
-        if not user_department_role_to:
-            self.user_department_role_to = []
-        else:
-            self.user_department_role_to = user_department_role_to
 
     def __repr__(self):
         return f'User({self.surname}, {self.name})'
@@ -69,13 +65,9 @@ class Department(db.Model):
     description = db.Column(db.String(300), nullable=False)
     user_department_role_to = db.relationship("UserDepartmentRole",backref='department',lazy=True)
 
-    def __init__(self, title, description, user_department_role_to=None):
+    def __init__(self, title, description):
         self.title = title
         self.description = description
-        if not user_department_role_to:
-            self.user_department_role_to = []
-        else:
-            self.user_department_role_to = user_department_role_to
 
     def __repr__(self):
         return f'Department({self.title})'
