@@ -22,7 +22,6 @@ class Adepartments(Resource):
         current_user = user_return()
         if current_user.is_admin:
             department_schema = DepartmentSchema()
-            print(request.form.to_dict())
             try:
                 department = department_schema.load(request.form.to_dict(), session=db.session)
             except ValidationError as e:
