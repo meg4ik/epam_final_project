@@ -20,7 +20,7 @@ Users
                     </thead>
                     <tbody>
                         {% for i in users %}
-                            <tr>
+                            <tr data-href="{{ url_for('user' ,uuid=i.uuid) }}">
                                 <th scope="row">{{ i.id }}</th>
                                 <td>{{ i.username }}</td>
                                 <td>{{ i.name }}</td>
