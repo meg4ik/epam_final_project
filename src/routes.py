@@ -6,6 +6,7 @@ from src.resources.profile import Profile
 from src.resources.ausers import Ausers
 from src.resources.adepartments import Adepartments
 from src.resources.user import User
+from src.resources.department import Department
 
 api.add_resource(Main, '/', '/main', strict_slashes=False)
 api.add_resource(About, '/about', strict_slashes=False)
@@ -15,3 +16,4 @@ api.add_resource(Profile, '/profile', strict_slashes=False)
 api.add_resource(Ausers, '/admin/users', strict_slashes=False)
 api.add_resource(Adepartments, '/admin/departments', strict_slashes=False)
 api.add_resource(User, '/user/<uuid>', strict_slashes=False)
+api.add_resource(Department, '/department/<uuid>', strict_slashes=False)

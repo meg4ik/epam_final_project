@@ -25,5 +25,9 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 
+if app.config['RUN_INSERT']:
+    from src.database.inserts import insert_run
+    insert_run()
+
 from src import routes
 from src.database import models

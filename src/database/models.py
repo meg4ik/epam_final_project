@@ -11,6 +11,10 @@ class UserDepartmentRole(db.Model):
 
     __table_args__ = (db.UniqueConstraint(user_id, department_id, role_id),)
 
+    def __init__(self, user, department, role):
+        self.user_id = user.id
+        self.department_id = department.id
+        self.role_id = role.id
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -53,6 +57,10 @@ class Role(db.Model):
     paycheck = db.Column(db.Integer, nullable=False)
     user_department_role_to = db.relationship("UserDepartmentRole",backref='role',lazy=True)
 
+    def __init__(self, title, paycheck):
+        self.title = title
+        self.paycheck = paycheck
+
     def __repr__(self):
         return f'Role({self.title})'
 
@@ -63,11 +71,13 @@ class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(40), nullable=False, unique=True)
     description = db.Column(db.String(300), nullable=False)
+    uuid = db.Column(db.String(36), unique=True)
     user_department_role_to = db.relationship("UserDepartmentRole",backref='department',lazy=True)
 
     def __init__(self, title, description):
         self.title = title
         self.description = description
+        self.uuid = str(uuid.uuid4())
 
     def __repr__(self):
         return f'Department({self.title})'
