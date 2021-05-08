@@ -16,6 +16,6 @@ class Profile(Resource):
             departments = db.session.query(Department).join(UserDepartmentRole).join(User).filter(User.uuid==current_user.uuid).all() 
             dep_and_roles = {}
             for x in departments:
-                roles = db.session.query(Role).join(UserDepartmentRole).join(Department).join(User).filter(User.uuid==current_user.uuid).filter(Department.title==x.title).all()
-                dep_and_roles[x.title] = roles
+                roles = db.session.query(Role).join(UserDepartmentRole).join(Department).join(User).filter(User.uuid==current_user.uuid).filter(Department.uuid==x.uuid).all()
+                dep_and_roles[x] = roles
             return make_response(render_template("profile.html",auth=True,sum_of_paycheck=sum_of_paycheck, user=current_user, dep_and_roles = dep_and_roles), 200)

@@ -16,8 +16,8 @@ class User(Resource):
         departments = db.session.query(Department).join(UserDepartmentRole).join(UserModel).filter(UserModel.uuid==uuid).all() 
         dep_and_roles = {}
         for x in departments:
-            roles = db.session.query(Role).join(UserDepartmentRole).join(Department).join(UserModel).filter(UserModel.uuid==uuid).filter(Department.title==x.title).all()
-            dep_and_roles[x.title] = roles
+            roles = db.session.query(Role).join(UserDepartmentRole).join(Department).join(UserModel).filter(UserModel.uuid==uuid).filter(Department.uuid==x.uuid).all()
+            dep_and_roles[x] = roles
         if current_user.is_admin:
             paycheck_list = db.session.query(Role).join(UserDepartmentRole).join(UserModel).filter(UserModel.uuid==uuid).all()
             sum_of_paycheck = sum([x.paycheck for x in paycheck_list])

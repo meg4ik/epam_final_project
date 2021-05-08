@@ -17,7 +17,7 @@ Departments
                     </thead>
                     <tbody>
                         {% for i in departments %}
-                            <tr>
+                            <tr data-href="{{ url_for('department' ,uuid=i.uuid) }}">
                                 <th scope="row">{{ i.id }}</th>
                                 <td>{{ i.title }}</td>
                                 <td>{{ i.description }}</td>

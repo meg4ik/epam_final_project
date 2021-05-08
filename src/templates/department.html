@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ department_obj.title }}
+{% endblock %}
+{% block content %}
+{% if user.is_admin %}
+
+{% else %}
+
+{% endif %}
+{% endblock %}
