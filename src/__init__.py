@@ -3,6 +3,8 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from simple_settings import settings
 
 from os import path
@@ -24,6 +26,12 @@ api = Api(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
+
+from src.database.admin_view import AdminIndexView
+admin = Admin(app, index_view=AdminIndexView(), template_mode='bootstrap3')
+
+from src.database.models import *
+admin.add_views(ModelView(User, db.session,category="model"), ModelView(Department, db.session,category="model"), ModelView(Role, db.session,category="model"), ModelView(UserDepartmentRole, db.session,category="model"))
 
 if app.config['RUN_INSERT']:
     from src.database.inserts import insert_run

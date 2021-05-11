@@ -11,8 +11,12 @@ class Profile(Resource):
         if current_user.is_admin:
             return make_response(render_template("profile.html",auth=True, user=current_user), 200)
         else:
-            paycheck_list = db.session.query(Role).join(UserDepartmentRole).join(User).filter(User.uuid==current_user.uuid).all()
-            sum_of_paycheck = sum([x.paycheck for x in paycheck_list])
+            sum_of_paycheck = 0
+            paycheck_list = db.session.query(UserDepartmentRole).join(User).filter(UserDepartmentRole.user_id==current_user.id).all()
+            for i in paycheck_list:
+                role = db.session.query(Role).filter(Role.id == i.role_id).first()
+                sum_of_paycheck += role.paycheck
+
             departments = db.session.query(Department).join(UserDepartmentRole).join(User).filter(User.uuid==current_user.uuid).all() 
             dep_and_roles = {}
             for x in departments:
