@@ -30,8 +30,9 @@ bcrypt = Bcrypt(app)
 from src.database.admin_view import AdminIndexView
 admin = Admin(app, index_view=AdminIndexView(), template_mode='bootstrap3')
 
-from src.database.models import *
-admin.add_views(ModelView(User, db.session,category="model"), ModelView(Department, db.session,category="model"), ModelView(Role, db.session,category="model"), ModelView(UserDepartmentRole, db.session,category="model"))
+from src.database.models import User, Department, Role, UserDepartmentRole
+from src.database.admin_view import UserModelView, DepartmentModelView
+admin.add_views(UserModelView(User, db.session,category="model"), DepartmentModelView(Department, db.session,category="model"), ModelView(Role, db.session,category="model"), ModelView(UserDepartmentRole, db.session,category="model"))
 
 if app.config['RUN_INSERT']:
     from src.database.inserts import insert_run
