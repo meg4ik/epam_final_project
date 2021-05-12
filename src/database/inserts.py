@@ -82,52 +82,7 @@ def finsert():
         title="Bank blockchain",
         description="Blockchain alghorithms for internal bank system"
         )
-    # udr1 = UserDepartmentRole(
-    #     user=us2,
-    #     department=dep1,
-    #     role=role1
-    #     )
-    # udr2 = UserDepartmentRole(
-    #     user=us3,
-    #     department=dep1,
-    #     role=role1
-    #     )
-    # udr3 = UserDepartmentRole(
-    #     user=us3,
-    #     department=dep2,
-    #     role=role2
-    #     )
-    # udr4 = UserDepartmentRole(
-    #     user=us4,
-    #     department=dep1,
-    #     role=role2
-    #     )
-    # udr5 = UserDepartmentRole(
-    #     user=us4,
-    #     department=dep2,
-    #     role=role2
-    #     )
-    # udr6 = UserDepartmentRole(
-    #     user=us4,
-    #     department=dep3,
-    #     role=role5
-    #     )
-    # udr7 = UserDepartmentRole(
-    #     user=us5,
-    #     department=dep1,
-    #     role=role5
-    #     )
-    # udr8 = UserDepartmentRole(
-    #     user=us5,
-    #     department=dep2,
-    #     role=role1
-    #     )
-    # udr9 = UserDepartmentRole(
-    #     user=us6,
-    #     department=dep3,
-    #     role=role4
-    #     )
-
+    
     db.session.add(us1)
     db.session.add(us2)
     db.session.add(us3)
@@ -145,15 +100,61 @@ def finsert():
     db.session.add(dep2)
     db.session.add(dep3)
 
-    # db.session.add(udr1)
-    # db.session.add(udr2)
-    # db.session.add(udr3)
-    # db.session.add(udr4)
-    # db.session.add(udr5)
-    # db.session.add(udr6)
-    # db.session.add(udr7)
-    # db.session.add(udr8)
-    # db.session.add(udr9)
+    udr1 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us2.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep1.title).first(),
+        role=db.session.query(Role).filter(Role.title == role1.title).first()
+        )
+    udr2 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us3.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep1.title).first(),
+        role=db.session.query(Role).filter(Role.title == role1.title).first()
+        )
+    udr3 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us3.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep2.title).first(),
+        role=db.session.query(Role).filter(Role.title == role2.title).first()
+        )
+    udr4 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us4.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep1.title).first(),
+        role=db.session.query(Role).filter(Role.title == role2.title).first()
+        )
+    udr5 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us4.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep2.title).first(),
+        role=db.session.query(Role).filter(Role.title == role2.title).first()
+        )
+    udr6 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us4.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep3.title).first(),
+        role=db.session.query(Role).filter(Role.title == role5.title).first()
+        )
+    udr7 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us5.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep1.title).first(),
+        role=db.session.query(Role).filter(Role.title == role5.title).first()
+        )
+    udr8 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us5.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep2.title).first(),
+        role=db.session.query(Role).filter(Role.title == role1.title).first()
+        )
+    udr9 = UserDepartmentRole(
+        user=db.session.query(User).filter(User.username == us6.username).first(),
+        department=db.session.query(Department).filter(Department.title == dep3.title).first(),
+        role=db.session.query(Role).filter(Role.title == role4.title).first()
+        )
+
+    db.session.add(udr1)
+    db.session.add(udr2)
+    db.session.add(udr3)
+    db.session.add(udr4)
+    db.session.add(udr5)
+    db.session.add(udr6)
+    db.session.add(udr7)
+    db.session.add(udr8)
+    db.session.add(udr9)
 
     db.session.commit()
     db.session.close()

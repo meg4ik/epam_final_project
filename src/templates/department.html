@@ -3,9 +3,6 @@
 {{ department_obj.title }}
 {% endblock %}
 {% block content %}
-{% if user.is_admin %}
-
-{% else %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-8">
@@ -45,5 +42,4 @@
         </div>
     </div>
 </div>
-{% endif %}
 {% endblock %}

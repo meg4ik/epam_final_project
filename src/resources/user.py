@@ -19,8 +19,11 @@ class User(Resource):
             roles = db.session.query(Role).join(UserDepartmentRole).join(Department).join(UserModel).filter(UserModel.uuid==uuid).filter(Department.uuid==x.uuid).all()
             dep_and_roles[x] = roles
         if current_user.is_admin:
-            paycheck_list = db.session.query(Role).join(UserDepartmentRole).join(UserModel).filter(UserModel.uuid==uuid).all()
-            sum_of_paycheck = sum([x.paycheck for x in paycheck_list])
+            sum_of_paycheck = 0
+            paycheck_list = db.session.query(UserDepartmentRole).join(UserModel).filter(UserDepartmentRole.user_id==current_user.id).all()
+            for i in paycheck_list:
+                role = db.session.query(Role).filter(Role.id == i.role_id).first()
+                sum_of_paycheck += role.paycheck
             return make_response(render_template("user.html",auth=True, user=current_user, user_view = user_obj, dep_and_roles = dep_and_roles, sum_of_paycheck=sum_of_paycheck), 200)
         else: 
             return make_response(render_template("user.html",auth=True, user=current_user, dep_and_roles = dep_and_roles, user_view = user_obj), 200)
