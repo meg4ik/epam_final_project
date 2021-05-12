@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+Departments
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <form class="navbar-form text-center p-3" method="GET">
+        <div class="form-group">
+            <input type="text" class="form-controll" placeholder="Search" name="q" value="{{ request.args.get('q', '') }}">
+        </div>
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark">
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in users %}
+                            <tr data-href="{{ url_for('department' ,uuid=i.uuid) }}">
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>{{ i.title }}</td>
+                                <td>{{ i.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+{% endblock %}
