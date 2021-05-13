@@ -6,9 +6,8 @@ from src.database.models import User
 
 class Users(Resource):
     @token_required
-    def get(self):
+    def get(self, page):
         q = request.args.get('q')
-        page = request.args.get('page')
         if page and page.isdigit():
             page = int(page)
         else:

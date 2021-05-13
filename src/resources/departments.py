@@ -6,13 +6,19 @@ from src.database.models import Department
 
 class Departments(Resource):
     @token_required
-    def get(self):
+    def get(self, page):
         q = request.args.get('q')
-        if q:
-            departments = db.session.query(Department).filter(Department.title.contains(q) | Department.description.contains(q)).all()
+        if page and page.isdigit():
+            page = int(page)
         else:
-            departments = db.session.query(Department).all()
+            page = 1
+        if q:
+            departments = db.session.query(Department).filter(Department.title.contains(q) | Department.description.contains(q))
+        else:
+            departments = db.session.query(Department)
 
         current_user = user_return()
         
-        return make_response(render_template("departments.html",auth=True, user=current_user,departments = departments))
+        pages = departments.paginate(page=page, per_page=8)
+
+        return make_response(render_template("departments.html",auth=True, user=current_user,pages=pages))
