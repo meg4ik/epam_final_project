@@ -42,6 +42,7 @@
         </div>
         <div class="col-4">
             <div class="position-relative overflow-hidden p-md-5 m-md-3 text-center bg-dark">
+                <p>{% if user.uuid == user_view.uuid %}(You){% endif %}</p>
                 <form action="{{ url_for('user' ,uuid=user_view.uuid) }}" class="ajax_put">
 
                 <label for="fusername">Username:</label>
@@ -78,7 +79,7 @@
         <div class="col-2"></div>
         <div class="col-4">
             <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark">
-                <p class="h2">{{ user_view.surname }} {{ user_view.name }}</p>
+                <p class="h2">{{ user_view.surname }} {{ user_view.name }} {% if user.uuid == user_view.uuid %}(You){% endif %}</p>
                 <p class="h2">Email : {{ user_view.email_address }}</p>
             </div>
         </div>

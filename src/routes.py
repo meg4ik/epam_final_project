@@ -7,6 +7,8 @@ from src.resources.user import User
 from src.resources.department import Department
 from src.resources.users import Users
 from src.resources.departments import Departments
+from src.resources.chats import Chats
+from src.resources.chat import Chat
 
 api.add_resource(Main, '/', '/main', strict_slashes=False)
 api.add_resource(About, '/about', strict_slashes=False)
@@ -17,3 +19,5 @@ api.add_resource(User, '/user/<uuid>', strict_slashes=False)
 api.add_resource(Department, '/department/<uuid>', strict_slashes=False)
 api.add_resource(Users, '/users/<page>', strict_slashes=False)
 api.add_resource(Departments, '/departments/<page>', strict_slashes=False)
+api.add_resource(Chats, '/chats', strict_slashes=False)
+api.add_resource(Chat, '/chat/<uuid_to>', strict_slashes=False)

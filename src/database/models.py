@@ -1,3 +1,4 @@
+from flask_sqlalchemy.model import Model
 from src import db
 from flask_bcrypt import generate_password_hash, check_password_hash
 import uuid
@@ -15,6 +16,23 @@ class UserDepartmentRole(db.Model):
         self.user_id = user.id
         self.department_id = department.id
         self.role_id = role.id
+
+class Message(db.Model):
+    __tablename__ = "message"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id_from = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id_to = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    prev_message_id = db.Column(db.Integer)
+    text = db.Column(db.String(100), nullable=False)
+
+    user_from = db.relationship("User", foreign_keys=[user_id_from])
+    user_to = db.relationship("User", foreign_keys=[user_id_to])
+
+    def __init__(self, user_id_from, user_id_to, prev_message_id, text):
+        self.user_id_from = user_id_from
+        self.user_id_to = user_id_to
+        self.prev_message_id = prev_message_id
+        self.text = text
 
 class User(db.Model):
     __tablename__ = 'user'

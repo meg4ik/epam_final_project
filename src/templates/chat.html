@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+Chat
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark">
+                <div data-spy="scroll" data-offset="0" class="p-3">
+                    {% if mess_dict %}
+                        {% for i in mess_dict %}
+                            {% if i.user_id_from == user.uuid %}
+                            <p class="text-right">{{ mess_dict[i] }}</p>
+                            {% else %}
+                            <p class="text-left">{{ mess_dict[i] }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                    <p>Empty</p>
+                    {% endif %}
+                </div>
+                <form class="navbar-form text-center p-3" method="POST">
+                    <input type="text" class="form-controll" placeholder="Your message" name="m">
+                    <button type="submit" class="btn btn-info mb-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+{% endblock %}
