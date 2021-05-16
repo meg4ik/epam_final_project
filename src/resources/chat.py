@@ -17,19 +17,19 @@ class Chat(Resource):
             flash("Not such a user", category='danger')
             return redirect(url_for('main'))
         current_user = user_return()
-        mess_dict = {}
+        mess_dict = []
         first_mes = get_last_mess(current_user.id, user_obj_to.id)
         if not first_mes:
             return make_response(render_template("chat.html", auth=True, user=current_user, mess_dict=mess_dict), 200)
         next_mess_id = first_mes.id
-        mess_dict[first_mes.user_from.uuid] = first_mes.text
+        mess_dict.append([first_mes.user_from,first_mes.text])
         while True:
             next_mess = db.session.query(
                 Message).filter_by(prev_message_id=next_mess_id).first()
             if not next_mess:
                 break
             else:
-                mess_dict[next_mess.user_from.uuid] = next_mess.text
+                mess_dict.append([next_mess.user_from, next_mess.text])
                 next_mess_id = next_mess.id
         return make_response(render_template("chat.html", auth=True, user=current_user, mess_dict=mess_dict), 200)
     

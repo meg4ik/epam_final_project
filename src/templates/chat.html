@@ -8,18 +8,36 @@ Chat
         <div class="col-3"></div>
         <div class="col-6">
             <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark">
-                <div data-spy="scroll" data-offset="0" class="p-3">
-                    {% if mess_dict %}
-                        {% for i in mess_dict %}
-                            {% if i.user_id_from == user.uuid %}
-                            <p class="text-right">{{ mess_dict[i] }}</p>
-                            {% else %}
-                            <p class="text-left">{{ mess_dict[i] }}</p>
-                            {% endif %}
-                        {% endfor %}
-                    {% else %}
-                    <p>Empty</p>
-                    {% endif %}
+                <div class="overflow-auto scrollChat">
+                        {% if mess_dict %}
+                            {% for i in mess_dict %}
+                                {% if i[0].uuid == user.uuid %}
+                                <div class="card bg-secondary m-3" style="width: 50%; float: right;">
+                                    <div class="card-header">
+                                        <a href="{{ url_for('user' ,uuid=i[0].uuid) }}" class="card-header text-light">
+                                            {{ i[0].surname }}  {{ i[0].name }}
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{{ i[1] }}</p>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="card bg-secondary m-3" style="width: 50%;">
+                                    <div class="card-header">
+                                        <a href="{{ url_for('user' ,uuid=i[0].uuid) }}" class="card-header text-light">
+                                            {{ i[0].surname }}  {{ i[0].name }}
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{{ i[1] }}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                        <p>Empty</p>
+                        {% endif %}
                 </div>
                 <form class="navbar-form text-center p-3" method="POST">
                     <input type="text" class="form-controll" placeholder="Your message" name="m">
