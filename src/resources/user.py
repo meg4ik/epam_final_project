@@ -20,7 +20,7 @@ class User(Resource):
             dep_and_roles[x] = roles
         if current_user.is_admin:
             sum_of_paycheck = 0
-            paycheck_list = db.session.query(UserDepartmentRole).join(UserModel).filter(UserDepartmentRole.user_id==current_user.id).all()
+            paycheck_list = db.session.query(UserDepartmentRole).join(UserModel).filter(UserDepartmentRole.user_id==user_obj.id).all()
             for i in paycheck_list:
                 role = db.session.query(Role).filter(Role.id == i.role_id).first()
                 sum_of_paycheck += role.paycheck
