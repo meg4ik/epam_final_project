@@ -6,6 +6,7 @@ from flask_bcrypt import Bcrypt
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from simple_settings import settings
+from logging import FileHandler, WARNING
 
 from os import path
 
@@ -15,12 +16,12 @@ temp_dir = path.abspath(path.dirname(__file__))
 app = Flask(__name__, static_folder=path.join(temp_dir, 'static'),
             template_folder=path.join(temp_dir, 'templates'))
 
-# try:
-#     app.config.update(**settings.as_dict())
-# except:
-#     print ("Please configurate your environment!")
-app.config.from_pyfile(path.join(path.dirname(
-    temp_dir), 'configs', 'common_debug.py'))
+try:
+    app.config.update(**settings.as_dict())
+except:
+    print("Please configurate your environment!")
+# app.config.from_pyfile(path.join(path.dirname(
+#     temp_dir), 'configs', 'common_debug.py'))
 
 api = Api(app)
 db = SQLAlchemy(app)
@@ -37,6 +38,11 @@ admin.add_views(UserModelView(User, db.session,category="model"), DepartmentMode
 if app.config['RUN_INSERT']:
     from src.database.inserts import insert_run
     insert_run()
+
+if not app.config['DEBUG']:
+    file_error_handler = FileHandler('logs/errorlog.txt')
+    file_error_handler.setLevel(WARNING)
+    app.logger.addHandler(file_error_handler)
 
 from src import routes
 from src.database import models

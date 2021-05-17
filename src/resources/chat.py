@@ -42,14 +42,17 @@ class Chat(Resource):
             return redirect(url_for('main'))
 
         first_mes = get_last_mess(current_user.id, user_obj_to.id)
-        next_mess_id = first_mes.id
-        while True:
-            next_mess = db.session.query(
-                Message).filter_by(prev_message_id=next_mess_id).first()
-            if not next_mess:
-                break
-            else:
-                next_mess_id = next_mess.id
+        if not first_mes:
+            next_mess_id = None
+        else:
+            next_mess_id = first_mes.id
+            while True:
+                next_mess = db.session.query(
+                    Message).filter_by(prev_message_id=next_mess_id).first()
+                if not next_mess:
+                    break
+                else:
+                    next_mess_id = next_mess.id
         m = request.form.get('m')
         mess = Message(
             user_id_from = current_user.id,

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-{{ user.surname }} {{ user.name }}
+{{ user_view.surname }} {{ user_view.name }}
 {% endblock %}
 {% block content %}
 {% if user.is_admin %}
@@ -38,6 +38,7 @@
                     {% endif %}
                 </div>
                 <p class="h4 p-5">This month's salaries: {{ sum_of_paycheck }}$ </p>
+                {% if user.uuid != user_view.uuid %}<a href="{{ url_for('chat' ,uuid_to=user_view.uuid) }}" class="btn btn-primary m-md-3 p-1">Send message</a>{% endif %}
             </div>
         </div>
         <div class="col-4">
@@ -81,6 +82,7 @@
             <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark">
                 <p class="h2">{{ user_view.surname }} {{ user_view.name }} {% if user.uuid == user_view.uuid %}(You){% endif %}</p>
                 <p class="h2">Email : {{ user_view.email_address }}</p>
+                {% if user.uuid != user_view.uuid %}<a href="{{ url_for('chat' ,uuid_to=user_view.uuid) }}" class="btn btn-primary m-md-3 p-1">Send message</a>{% endif %}
             </div>
         </div>
         <div class="col-4">
