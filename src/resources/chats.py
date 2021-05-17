@@ -20,4 +20,4 @@ class Chats(Resource):
                 user = db.session.query(User).filter_by(id = i.user_id_from).first()
                 users_chats[user] = i
 
-        return make_response(render_template("chats.html",auth=True, user=current_user,users_chats=users_chats))
+        return make_response(render_template("chats.html",auth=True, user=current_user,users_chats=users_chats),200)

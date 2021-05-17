@@ -21,4 +21,4 @@ class Departments(Resource):
         
         pages = departments.paginate(page=page, per_page=8)
 
-        return make_response(render_template("departments.html",auth=True, user=current_user,pages=pages))
+        return make_response(render_template("departments.html",auth=True, user=current_user,pages=pages), 200)

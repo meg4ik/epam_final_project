@@ -18,7 +18,7 @@ class Login(Resource):
                                   "HS256"])['user_id']
                 user = User.query.filter_by(uuid=uuid).first()
             except:
-                return make_response(render_template("login.html"))
+                return make_response(render_template("login.html"), 419)
             flash('You already authorized', category='warning')
             return redirect(url_for('main'))
         return make_response(render_template("login.html"), 200)

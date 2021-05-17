@@ -10,6 +10,9 @@ from src.resources.departments import Departments
 from src.resources.chats import Chats
 from src.resources.chat import Chat
 
+from src import app
+from flask import render_template
+
 api.add_resource(Main, '/', '/main', strict_slashes=False)
 api.add_resource(About, '/about', strict_slashes=False)
 api.add_resource(Login, '/login', strict_slashes=False)
@@ -21,3 +24,8 @@ api.add_resource(Users, '/users/<page>', strict_slashes=False)
 api.add_resource(Departments, '/departments/<page>', strict_slashes=False)
 api.add_resource(Chats, '/chats', strict_slashes=False)
 api.add_resource(Chat, '/chat/<uuid_to>', strict_slashes=False)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
