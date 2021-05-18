@@ -1,19 +1,21 @@
 from src import app
 
 # TODO
-# автотесты
-# переделать concept.jpg и создать ER-диаграмму
 
-# подписать везде комментарии и документацию
-# рефакторинг кода
+# 5 a lot of theory
 
-# ubuntu
-# travis
-# docker
-# heroku
+# 4 отдельная документация с переделать concept.jpg и создать ER-диаграмму
 
-# a lot of theory
+# 3 ubuntu
+# 3 gunikorn
+# 3 travis
+
+# 2 автотесты
+
+# 1 подписать везде комментарии
+# 1 рефакторинг кода
 
 
+#app starting here
 if __name__ == "__main__":
     app.run()

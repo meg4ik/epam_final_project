@@ -6,8 +6,15 @@ from src import db
 from flask_bcrypt import generate_password_hash
 
 class User(Resource):
+    """
+    User resource
+    Сontains user info
+    Requires uuid user as uuid
+    Authentication is required
+    """
     @token_required
     def get(self, uuid = None):
+        #get user obj bu uuid in link
         user_obj = db.session.query(UserModel).filter_by(uuid = uuid).first()
         if not uuid or not user_obj:
             flash("Not such a user",category='danger')
