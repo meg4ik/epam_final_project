@@ -80,7 +80,7 @@ class User(Resource):
                     )
                 )
                 #check on password data
-                if 'password' in request.form.to_dict():
+                if len(request.form.to_dict()['password']):
                     db.session.query(UserModel).filter_by(uuid = uuid).update(
                     dict(
                         password=generate_password_hash(request.form.get('password')).decode('utf8'))
@@ -98,7 +98,7 @@ class User(Resource):
                     ))
                 #save to db
                 user.save_to_db()
-                flash("Update was successful",category='danger')
+                flash("Update was successful",category='success')
             #something went wrong
             except (ValueError, KeyError) as e:
                 flash("Wrong data",category='danger')
@@ -125,7 +125,7 @@ class User(Resource):
             #delete user
             db.session.delete(user)
             db.session.commit()
-            flash("Deletion was successful",category='danger')
+            flash("Deletion was successful",category='success')
         else:
             #current session user status is not admin
             flash("No permission for this page",category='danger')

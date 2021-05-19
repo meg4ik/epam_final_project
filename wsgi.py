@@ -12,9 +12,6 @@ from src import app
 
 # 2 автотесты
 
-# 1 подписать везде комментарии
-# 1 рефакторинг кода
-
 
 #app starting here
 if __name__ == "__main__":
