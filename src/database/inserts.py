@@ -1,5 +1,6 @@
 from src import db
-from src.database.models import User, Role, Department, UserDepartmentRole
+from src.database.models import Department, Role, User, UserDepartmentRole
+
 
 def finsert():
     us1 = User(
@@ -160,6 +161,9 @@ def finsert():
     db.session.close()
 
 def insert_run():
+    """
+    Inserting information into a database
+    """
     print("Start inserting")
     try:
         finsert()

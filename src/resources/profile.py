@@ -1,8 +1,9 @@
-from flask_restful import Resource
-from src.token import token_required, user_return
 from flask import make_response, render_template
-from src.database.models import User, Department,Role,UserDepartmentRole
+from flask_restful import Resource
 from src import db
+from src.database.models import Department, Role, User, UserDepartmentRole
+from src.token import token_required, user_return
+
 
 class Profile(Resource):
     """

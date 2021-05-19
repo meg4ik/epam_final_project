@@ -1,8 +1,11 @@
-import jwt
 from functools import wraps
-from flask import request, redirect, url_for, flash
-from src.database.models import User
+
+import jwt
+from flask import flash, redirect, request, url_for
+
 from src import app
+from src.database.models import User
+
 
 # token check decorator
 def token_required(func):

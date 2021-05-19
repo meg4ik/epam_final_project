@@ -1,8 +1,9 @@
-from flask_restful import Resource
-from src.token import token_required, user_return
 from flask import make_response, render_template, request
+from flask_restful import Resource
 from src import db
 from src.database.models import User
+from src.token import token_required, user_return
+
 
 class Users(Resource):
     """

@@ -1,9 +1,8 @@
 import datetime
-import jwt
-import datetime
 
+import jwt
 from flask import (flash, make_response, redirect, render_template, request,
-                   url_for, make_response)
+                   url_for)
 from flask_restful import Resource
 from src import app
 from src.database.models import User

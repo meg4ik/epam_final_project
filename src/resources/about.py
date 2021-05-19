@@ -1,8 +1,8 @@
-from flask_restful import Resource
-from flask import render_template, make_response, request
-from src.database.models import User
 import jwt
+from flask import make_response, render_template, request
+from flask_restful import Resource
 from src import app
+from src.database.models import User
 
 
 class About(Resource):

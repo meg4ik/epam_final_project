@@ -1,9 +1,13 @@
-from flask_sqlalchemy.model import Model
-from src import db
-from flask_bcrypt import generate_password_hash, check_password_hash
 import uuid
 
+from flask_bcrypt import check_password_hash, generate_password_hash
+from src import db
+
+
 class UserDepartmentRole(db.Model):
+    """
+    UserDepartmentRole model
+    """
     __tablename__ = "user_department_role"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
@@ -18,6 +22,9 @@ class UserDepartmentRole(db.Model):
         self.role_id = role.id
 
 class Message(db.Model):
+    """
+    Message model
+    """
     __tablename__ = "message"
     id = db.Column(db.Integer, primary_key=True)
     user_id_from = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
@@ -35,6 +42,9 @@ class Message(db.Model):
         self.text = text
 
 class User(db.Model):
+    """
+    User model
+    """
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -60,14 +70,24 @@ class User(db.Model):
         return f'User({self.surname}, {self.name})'
 
     def check_password(self, attempted_password):
+        """
+        Compare passwords hash
+        return bool
+        """
         return check_password_hash(self.password, attempted_password)
 
     def save_to_db(self):
+        """
+        add and save user obj
+        """
         db.session.add(self)
         db.session.commit()
 
 
 class Role(db.Model):
+    """
+    Role model
+    """
     __tablename__ = 'role'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -84,6 +104,9 @@ class Role(db.Model):
 
 
 class Department(db.Model):
+    """
+    Department model
+    """
     __tablename__ = 'department'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -101,5 +124,8 @@ class Department(db.Model):
         return f'Department({self.title})'
 
     def save_to_db(self):
+        """
+        add and save department obj
+        """
         db.session.add(self)
         db.session.commit()

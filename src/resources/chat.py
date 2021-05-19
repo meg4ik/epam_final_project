@@ -1,8 +1,10 @@
+from flask import (flash, make_response, redirect, render_template, request,
+                   url_for)
 from flask_restful import Resource
-from src.token import token_required, user_return
-from flask import make_response, render_template, request, flash, redirect, url_for
-from src.database.models import User, Message
 from src import db
+from src.database.models import Message, User
+from src.token import token_required, user_return
+
 
 def get_last_mess(curr_id, to_id):
     """
