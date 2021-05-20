@@ -22,12 +22,12 @@ app = Flask(__name__, static_folder=path.join(temp_dir, 'static'),
             template_folder=path.join(temp_dir, 'templates'))
 
 #configurating environment
-# try:
-#     app.config.update(**settings.as_dict())
-# except:
-#     print("Please configurate your environment!")
-app.config.from_pyfile(path.join(path.dirname(
+try:
+    app.config.update(**settings.as_dict())
+except:
+    app.config.from_pyfile(path.join(path.dirname(
     temp_dir), 'configs', 'common_deploy.py'))
+    print("Сonfiguration has been installed as \'common_deploy\'")
 
 #services declarations
 api = Api(app)
