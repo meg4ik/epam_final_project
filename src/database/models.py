@@ -82,6 +82,7 @@ class User(db.Model):
         """
         db.session.add(self)
         db.session.commit()
+        db.session.close()
 
 
 class Role(db.Model):
@@ -129,3 +130,4 @@ class Department(db.Model):
         """
         db.session.add(self)
         db.session.commit()
+        db.session.close()

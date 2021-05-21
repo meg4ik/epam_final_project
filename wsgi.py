@@ -6,11 +6,11 @@ from src import app
 
 # 4 отдельная документация с переделать concept.jpg и создать ER-диаграмму
 
-# 3 ubuntu
-# 3 gunikorn
 # 3 travis
 
-# 2 автотесты
+# 2 gunikorn
+
+# 1 ubuntu
 
 
 #app starting here
