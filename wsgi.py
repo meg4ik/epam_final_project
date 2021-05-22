@@ -10,9 +10,6 @@ from src import app
 
 # 2 gunikorn
 
-# 1 ubuntu
-
-
 #app starting here
 if __name__ == "__main__":
     app.run()

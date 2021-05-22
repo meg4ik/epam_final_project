@@ -2,7 +2,7 @@ import secrets
 # python wsgi.py --settings=configs.common_debug
 DEBUG = True
 
-RUN_INSERT = False
+RUN_INSERT = True
 
 SECRET_KEY = secrets.token_hex(16)
 

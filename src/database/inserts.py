@@ -49,6 +49,37 @@ def finsert():
         surname="Gvido",
         email_address="algv@gmail.com",
         password="passofuser8989",
+        is_admin=False)
+    us7 = User(
+        username="3843",
+        name="Urii",
+        surname="Maslov",
+        email_address="urma@gmail.com",
+        password="passofuser3843",
+        is_admin=False
+        )
+    us8 = User(
+        username="3335",
+        name="Alfreds",
+        surname="Futterkiste",
+        email_address="alfu@gmail.com",
+        password="passofuser3335",
+        is_admin=False
+        )
+    us9 = User(
+        username="3475",
+        name="Drachenblut",
+        surname="Delikatessend",
+        email_address="drde@gmail.com",
+        password="passofuser3475",
+        is_admin=False
+        )
+    us10 = User(
+        username="0343",
+        name="Ernst",
+        surname="Handel",
+        email_address="erha@gmail.com",
+        password="passofuser0343",
         is_admin=False
         )
     role1 = Role(
@@ -90,6 +121,10 @@ def finsert():
     db.session.add(us4)
     db.session.add(us5)
     db.session.add(us6)
+    db.session.add(us7)
+    db.session.add(us8)
+    db.session.add(us9)
+    db.session.add(us10)
 
     db.session.add(role1)
     db.session.add(role2)
