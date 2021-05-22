@@ -1,0 +1,14 @@
+language: python
+
+python:
+  - 3.8
+
+services:
+    - mysql
+
+install: pip install -r requirements.txt
+
+before_script:
+  - mysql -e "CREATE DATABASE department_project;"
+
+script: pytets

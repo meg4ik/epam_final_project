@@ -7,6 +7,7 @@ from src import app
 # 4 отдельная документация с переделать concept.jpg и создать ER-диаграмму
 
 # 3 travis
+# coveralls.io
 
 # 2 gunikorn
 
