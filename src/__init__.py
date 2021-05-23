@@ -42,10 +42,6 @@ from src.database.models import User, Department, Role, UserDepartmentRole
 from src.database.admin_view import UserModelView, DepartmentModelView
 admin.add_views(UserModelView(User, db.session,category="model"), DepartmentModelView(Department, db.session,category="model"), ModelView(Role, db.session,category="model"), ModelView(UserDepartmentRole, db.session,category="model"))
 
-#insert of database info
-if app.config['RUN_INSERT']:
-    from src.database.inserts import insert_run
-    insert_run()
 
 #logging customization
 if not app.config['DEBUG']:

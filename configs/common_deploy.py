@@ -2,8 +2,6 @@ import secrets
 # python wsgi.py --settings=configs.common_deploy
 DEBUG = False
 
-RUN_INSERT = False
-
 SECRET_KEY = secrets.token_hex(16)
 
 database_pass = "qwerty"
