@@ -1,13 +1,7 @@
 CREATE USER 'db_user'@'localhost' IDENTIFIED BY 'qwerty';
-GRANT
-    INSERT, SELECT, UPDATE, DELETE
-    , SHOW VIEW
-ON
-    db_user.*
-TO
-    'db_user'@'localhost';
 
-FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON *.* TO 'db_user'@'localhost';
+
 
 
 CREATE DATABASE department_project;
