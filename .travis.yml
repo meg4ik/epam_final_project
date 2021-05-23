@@ -9,8 +9,11 @@ services:
 install: pip install -r requirements.txt pytest-cov python-coveralls
 
 before_script:
-  - mysql -e "CREATE DATABASE department_project;"
+  - echo "Creating the database..."
+  - mysql -uroot < travis_schemas/upgrade.sql
+  - python flask db upgrade
+
 
 script: pytest
 
-after_success: coveralls -i
+after_success: coveralls
