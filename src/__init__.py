@@ -46,6 +46,7 @@ admin.add_views(UserModelView(User, db.session,category="model"), DepartmentMode
 if app.config['RUN_INSERT']:
     from src.database.inserts import insert_run
     insert_run()
+    raise RuntimeError
 
 #logging customization
 if not app.config['DEBUG']:

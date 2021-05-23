@@ -12,6 +12,7 @@ before_script:
   - echo "Creating the database..."
   - mysql -uroot < travis_schemas/upgrade.sql
   - flask db upgrade
+  - python wsgi.py --settings=configs.common_debug
 
 
 script: pytest
