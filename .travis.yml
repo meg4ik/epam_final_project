@@ -17,4 +17,4 @@ before_script:
 
 script: pytest
 
-after_success: coveralls
+after_success: coveralls -v
