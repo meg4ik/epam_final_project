@@ -19,25 +19,25 @@
 ### Create DB
 
 1. Install Mysql server
-1. Create user:
+2. Create user:
 
 ```sh
 $ CREATE USER 'db_user'@'localhost' IDENTIFIED BY 'qwerty';
 ```
 
-1. Assign privileges:
+3. Assign privileges:
 
 ```sh
 $ GRANT ALL PRIVILEGES ON *.* TO 'db_user'@'localhost';
 ```
 
-1. Create database:
+4. Create database:
 
 ```sh
 $ CREATE DATABASE department_project;
 ```
 
-1. Create the tables and run the migrations:
+5. Create the tables and run the migrations:
 
 ```sh
 $ flask db upgrade
