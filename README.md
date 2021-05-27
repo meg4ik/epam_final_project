@@ -1,8 +1,6 @@
 # Department Project
 
-[![Build Status](https://travis-ci.com/meg4ik/epam_final_project.svg?branch=main)](https://travis-ci.com/meg4ik/epam_final_project)
-
-[![Coverage Status](https://coveralls.io/repos/github/meg4ik/epam_final_project/badge.svg)](https://coveralls.io/github/meg4ik/epam_final_project)
+[![Build Status](https://travis-ci.com/meg4ik/epam_final_project.svg?branch=main)](https://travis-ci.com/meg4ik/epam_final_project) [![Coverage Status](https://coveralls.io/repos/github/meg4ik/epam_final_project/badge.svg)](https://coveralls.io/github/meg4ik/epam_final_project)
 
 ## About Project
  Flask application for epam interview. Was made by Pavlo Ryndin.
