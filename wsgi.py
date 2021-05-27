@@ -2,11 +2,8 @@ from src import app
 
 # TODO
 
-# 3 a lot of theory
+# отдельная документация с переделать concept.jpg и создать ER-диаграмму
 
-# 2 отдельная документация с переделать concept.jpg и создать ER-диаграмму
-
-# 1 gunikorn
 
 #app starting here
 if __name__ == "__main__":
