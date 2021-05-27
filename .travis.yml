@@ -17,4 +17,4 @@ before_script:
 
 script: pytest --cov=src tests/
 
-after_success: coveralls -v
+after_success: coveralls
