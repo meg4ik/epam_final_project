@@ -1,8 +1,7 @@
 from src import app
 
 # TODO
-
-# отдельная документация с переделать concept.jpg и создать ER-диаграмму
+# Nothing, everything was done
 
 
 #app starting here
